@@ -109,6 +109,7 @@ YUI.add('bookie-view', function (Y) {
 
             this.api.data.count = pager.get('count');
             this.api.data.page = pager.get('page');
+            this.api.data.sort = "popular";
 
             this.api.call({
                 'success': function (data, request) {

@@ -306,6 +306,13 @@ def bmark_recent(request, with_content=False):
     page = int(params.get('page', '0'))
     count = int(params.get('count', RESULTS_MAX))
 
+    # check if we have a ordering by popularity specified
+    order_by = params.get('sort', None)
+    if order_by == "popular":
+        order_by = Bmark.clicks.desc()
+    else:
+        order_by = Bmark.stored.desc()
+
     # we only want to do the username if the username is in the url
     username = rdict.get('username', None)
     if username:
@@ -334,7 +341,7 @@ def bmark_recent(request, with_content=False):
     # We don't allow with_content by default because of this bug.
     recent_list = BmarkMgr.find(
         limit=count,
-        order_by=Bmark.stored.desc(),
+        order_by=order_by,
         page=page,
         tags=tags,
         username=username,
@@ -393,8 +400,6 @@ def user_bmark_count(request):
     })
 
 
-@view_config(route_name="api_bmarks_popular", renderer="jsonp")
-@view_config(route_name="api_bmarks_popular_user", renderer="jsonp")
 @api_auth('api_key', UserMgr.get, anon=True)
 def bmark_popular(request):
     """Get a list of the most popular bmarks for the api call"""

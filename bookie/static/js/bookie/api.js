@@ -329,6 +329,7 @@ YUI.add('bookie-api', function (Y) {
             data: {
                 count: 10,
                 page: 0,
+                sort: 'popular',
                 with_content: false
             }
         }, {
