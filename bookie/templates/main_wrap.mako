@@ -129,6 +129,8 @@
             <div class="yui3-u-1-4"></div>
             <div class="yui3-u-3-4">
                 <div class="right body">
+                    <a href="/recent?sort=popular">All Popular Bookmarks</a> |
+                    <a href="/${request.user.username}/recent?sort=popular">My Popular Bookmarks</a> |
                     <a href="http://docs.bmark.us">Bookie</a> |
                     <a href="http://github.com/mitechie/Bookie/issues">Support</a> |
                     <a href="${request.route_url('dashboard')}">Dashboard</a> |
