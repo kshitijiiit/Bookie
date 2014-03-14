@@ -99,7 +99,7 @@
                                 <em class="icon">Account Details</em>
 
                             % endif
-                            <span class="text">Account</span>
+                            <span class="text">${request.user.username}</span>
                     </a></span>
                 % else:
                     <span class="item">
