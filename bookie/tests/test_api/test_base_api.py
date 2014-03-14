@@ -366,62 +366,6 @@ class BookieAPITest(unittest.TestCase):
         # self.assertTrue('here dude' in bmark[u'readable']['content'],
         #     "There should be content: " + str(bmark))
 
-    def test_bookmark_popular_user(self):
-        """Test that we can get list of popular bookmarks with details"""
-        self._get_good_request(content=True)
-        res = self.testapp.get('/api/v1/admin/bmarks?sort=popular&
-                               api_key=' + API_KEY,
-                               status=200)
-
-        # make sure we can decode the body
-        bmark = json.loads(res.body)['bmarks'][0]
-	print bmark
-        self.assertEqual(
-            GOOGLE_HASH,
-            bmark[u'hash_id'],
-            "The hash_id should match: " + str(bmark[u'hash_id']))
-
-        self.assertTrue(
-            u'tags' in bmark,
-            "We should have a list of tags in the bmark returned")
-
-        self.assertTrue(
-            bmark[u'tags'][0][u'name'] in [u'python', u'search'],
-            "Tag should be either python or search:" +
-            str(bmark[u'tags'][0][u'name']))
-
-        res = self.testapp.get(
-            '/api/v1/admin/bmarks?with_content=true&api_key=' + API_KEY,
-            status=200)
-        self._check_cors_headers(res)
-
-    def test_bookmark_recent(self):
-        """Test that we can get list of popular bookmarks with details"""
-        self._get_good_request(content=True)
-        res = self.testapp.get('/api/v1/bmarks?api_key=' + API_KEY,
-                               status=200)
-
-        # make sure we can decode the body
-        bmark = json.loads(res.body)['bmarks'][0]
-        self.assertEqual(
-            GOOGLE_HASH,
-            bmark[u'hash_id'],
-            "The hash_id should match: " + str(bmark[u'hash_id']))
-
-        self.assertTrue(
-            u'tags' in bmark,
-            "We should have a list of tags in the bmark returned")
-
-        self.assertTrue(
-            bmark[u'tags'][0][u'name'] in [u'python', u'search'],
-            "Tag should be either python or search:" +
-            str(bmark[u'tags'][0][u'name']))
-
-        res = self.testapp.get(
-            '/api/v1/admin/bmarks?with_content=true&api_key=' + API_KEY,
-            status=200)
-        self._check_cors_headers(res)
-
     def test_bookmark_sync(self):
         """Test that we can get the sync list from the server"""
         self._get_good_request(content=True, second_bmark=True)
