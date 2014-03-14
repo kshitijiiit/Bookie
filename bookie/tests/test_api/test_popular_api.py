@@ -1,7 +1,3 @@
-"""Test that we're meeting delicious API specifications"""
-# Need to create a new renderer that wraps the jsonp renderer and adds these
-# heads to all responses. Then the api needs to be adjusted to use this new
-# renderer type vs jsonp.
 import logging
 import json
 import transaction
@@ -23,7 +19,7 @@ MAX_CLICKS = 60
 
 
 class BookiePopularAPITest(unittest.TestCase):
-    """Test the Bookie API"""
+    """Test the Bookie API for retreiving popular bookmarks"""
 
     def setUp(self):
         from pyramid.paster import get_app
